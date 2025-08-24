@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Perpetua 2025</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📋 Agenda Perpetua</h1>
+            <div class="header-controls">
+                <button class="btn" onclick="saveData()">💾 Guardar</button>
+                <button class="btn" onclick="printPage()">🖨️ Imprimir</button>
+                <button class="btn" onclick="exportPDF()">📄 Exportar PDF</button>
+                <button class="btn" onclick="clearAllData()">🗑️ Limpiar Todo</button>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-section">
+            <div class="page-selector">
+                <select id="pageSelect" onchange="changePage()">
+                    <option value="0">📋 Portada</option>
+                    <option value="1">📚 Índice</option>
+                    <option value="2">👤 Datos Personales</option>
+                    <option value="3">📅 Calendario 2025</option>
+                    <option value="4">🎂 Calendario Cumpleaños</option>
+                    <option value="5">📝 Calendario Evaluación</option>
+                    <option value="6">🎉 Calendario Eventos</option>
+                    <option value="7">📖 Enero</option>
+                    <option value="8">🌸 Febrero</option>
+                    <option value="9">🌱 Marzo</option>
+                    <option value="10">🌷 Abril</option>
+                    <option value="11">🌺 Mayo</option>
+                    <option value="12">☀️ Junio</option>
+                    <option value="13">🌻 Julio</option>
+                    <option value="14">🌿 Agosto</option>
+                    <option value="15">🍂 Septiembre</option>
+                    <option value="16">🍁 Octubre</option>
+                    <option value="17">❄️ Noviembre</option>
+                    <option value="18">🎄 Diciembre</option>
+                    <option value="19">⏰ Horario de Clases</option>
+                    <option value="20">📚 Lista de Lectura</option>
+                    <option value="21">🎯 Objetivos 2025</option>
+                    <option value="22">📋 Organizador Semanal</option>
+                </select>
+                
+                <div class="page-actions">
+                    <button class="btn" onclick="duplicatePage()">📄 Duplicar</button>
+                    <button class="btn delete" onclick="deletePage()" id="deleteBtn">🗑️ Eliminar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Portada -->
+            <div class="page active" id="page-0">
+                <div class="portada">
+                    <h1>Agenda</h1>
+                    <h2>Docente</h2>
+                    <div style="font-size: 2.5em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">2025</div>
+                </div>
+            </div>
+
+            <!-- Índice -->
+            <div class="page" id="page-1">
+                <div class="indice">
+                    <h2>Índice de Contenidos</h2>
+                    <ul class="indice-list" id="indiceList">
+                        <!-- Se genera automáticamente -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Datos Personales -->
+            <div class="page" id="page-2">
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <h2 style="color: #8B9A8B; text-align: center; margin-bottom: 30px; font-size: 2.5em;">Datos Personales</h2>
+                    
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" placeholder="Ingrese su nombre completo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" placeholder="Ingrese su dirección">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" placeholder="Ingrese su teléfono">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" placeholder="Ingrese su correo electrónico">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="otros">Otros datos</label>
+                        <textarea id="otros" placeholder="Información adicional que desee incluir..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendario 2025 -->
+            <div class="page" id="page-3">
+                <h2 style="color: #8B9A8B; text-align: center; margin-bottom: 30px; font-size: 2.5em;">Calendario 2025</h2>
+                <div class="calendar-year">
+                    <!-- Generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Calendario Cumpleaños -->
+            <div class="page" id="page-4">
+                <h2 style="color: #8B9A8B; text-align: center; margin-bottom: 30px; font-size: 2.5em;">🎂 Calendario de Cumpleaños</h2>
+                <div class="birthday-calendar">
+                    <!-- Generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Calendario Evaluación -->
+            <div class="page" id="page-5">
+                <h2 style="color: #8B9A8B; text-align: center; margin-bottom: 30px; font-size: 2.5em;">📝 Calendario de Evaluación</h2>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div class="evaluation-form" style="margin-bottom: 20px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 3fr 1fr; gap: 15px; align-items: end; background: #F8F9F8; padding: 15px; border-radius: 8px;">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Fecha Examen</label>
+                                <input type="date" id="eval-fecha">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Clase</label>
+                                <input type="text" id="eval-clase" placeholder="Materia">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Contenido</label>
+                                <input type="text" id="eval-contenido" placeholder="Tema a evaluar">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Fecha Entrega</label>
+                                <input type="date" id="eval-entrega">
+                            </div>
+                        </div>
+                        <button class="btn" onclick="addEvaluation()" style="margin-top: 15px; background: #8B9A8B;">➕ Agregar Evaluación</button>
+                    </div>
+                    <div class="evaluation-list" id="evaluationList">
+                        <!-- Generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendario Eventos -->
+            <div class="page" id="page-6">
+                <h2 style="color: #8B9A8B; text-align: center; margin-bottom: 30px; font-size: 2.5em;">🎉 Calendario de Eventos</h2>
+                <div class="events-calendar">
+                    <!-- Generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Monthly Pages (Enero - Diciembre) -->
+            <div class="page" id="page-7">
+                <div class="monthly-page" data-month="Enero">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">📖 Enero</h2>
+                        <div class="mini-calendar" id="mini-enero"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-8">
+                <div class="monthly-page" data-month="Febrero">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">🌸 Febrero</h2>
+                        <div class="mini-calendar" id="mini-febrero"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-9">
+                <div class="monthly-page" data-month="Marzo">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">🌱 Marzo</h2>
+                        <div class="mini-calendar" id="mini-marzo"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-10">
+                <div class="monthly-page" data-month="Abril">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">🌷 Abril</h2>
+                        <div class="mini-calendar" id="mini-abril"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-11">
+                <div class="monthly-page" data-month="Mayo">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">🌺 Mayo</h2>
+                        <div class="mini-calendar" id="mini-mayo"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-12">
+                <div class="monthly-page" data-month="Junio">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">☀️ Junio</h2>
+                        <div class="mini-calendar" id="mini-junio"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-13">
+                <div class="monthly-page" data-month="Julio">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">🌻 Julio</h2>
+                        <div class="mini-calendar" id="mini-julio"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-14">
+                <div class="monthly-page" data-month="Agosto">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">🌿 Agosto</h2>
+                        <div class="mini-calendar" id="mini-agosto"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-15">
+                <div class="monthly-page" data-month="Septiembre">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">🍂 Septiembre</h2>
+                        <div class="mini-calendar" id="mini-septiembre"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-16">
+                <div class="monthly-page" data-month="Octubre">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">🍁 Octubre</h2>
+                        <div class="mini-calendar" id="mini-octubre"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-17">
+                <div class="monthly-page" data-month="Noviembre">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">❄️ Noviembre</h2>
+                        <div class="mini-calendar" id="mini-noviembre"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-18">
+                <div class="monthly-page" data-month="Diciembre">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                        <h2 style="color: #8B9A8B; font-size: 3em; margin: 0;">🎄 Diciembre</h2>
+                        <div class="mini-calendar" id="mini-diciembre"></div>
+                    </div>
+                    <div class="monthly-grid"></div>
+                </div>
+            </div>
+
+            <!-- Horario de Clases -->
+            <div class="page" id="page-19">
+                <h2 style="color: #8B9A8B; text-align: center; margin-bottom: 30px; font-size: 2.5em;">⏰ Horario de Clases</h2>
+                <div class="schedule-container">
+                    <!-- Generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Lista de Lectura -->
+            <div class="page" id="page-20">
+                <h2 style="color: #8B9A8B; text-align: center; margin-bottom: 30px; font-size: 2.5em;">📚 Lista de Lectura</h2>
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div class="reading-form" style="margin-bottom: 30px;">
+                        <div class="form-group">
+                            <input type="text" id="new-book" placeholder="Agregar libro a la lista..." style="margin-bottom: 10px;">
+                            <button class="btn" onclick="addBook()" style="background: #8B9A8B;">📚 Agregar Libro</button>
+                        </div>
+                    </div>
+                    <div class="reading-list" id="readingList">
+                        <!-- Generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Objetivos 2025 -->
+            <div class="page" id="page-21">
+                <h2 style="color: #8B9A8B; text-align: center; margin-bottom: 30px; font-size: 2.5em;">🎯 Objetivos 2025</h2>
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div class="goals-form" style="margin-bottom: 30px;">
+                        <div class="form-group">
+                            <textarea id="new-goal" placeholder="Escriba su nuevo objetivo..." style="margin-bottom: 10px; min-height: 80px;"></textarea>
+                            <button class="btn" onclick="addGoal()" style="background: #8B9A8B;">🎯 Agregar Objetivo</button>
+                        </div>
+                    </div>
+                    <div class="goals-list" id="goalsList">
+                        <!-- Generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Organizador Semanal -->
+            <div class="page" id="page-22">
+                <h2 style="color: #8B9A8B; text-align: center; margin-bottom: 30px; font-size: 2.5em;">📋 Organizador Semanal</h2>
+                <div class="weekly-organizer">
+                    <!-- Generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
